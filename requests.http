@@ -1,0 +1,31 @@
+POST http://localhost:8080/accounts
+Content-Type: application/json
+
+{
+  "type": "SAVINGS",
+  "balance": 1200.50
+}
+
+### Get account by ID
+GET http://localhost:8080/accounts/999
+Accept: application/json
+### Update account
+PUT http://localhost:8080/accounts/2
+Content-Type: application/json
+
+{
+  "type": "SAVINGS",
+  "balance": 9500.00
+}
+
+### Update account that doesn't exist
+PUT http://localhost:8080/accounts/999
+Content-Type: application/json
+
+{
+  "type": "SAVINGS",
+  "balance": 9500.00
+}
+
+### Delete account
+DELETE http://localhost:8080/accounts/4

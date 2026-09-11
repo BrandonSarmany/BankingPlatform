@@ -1,12 +1,27 @@
 package com.bankingplatform.model;
+import java.math.BigDecimal;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
+@Entity
+@Table(name = "accounts")
 public class Account {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
-    private double balance;
+    @Column(precision = 19, scale = 2, nullable = false)
+    private BigDecimal balance;
 
-    public Account(Long id, String type, double balance){
-        this.id = id;
+    protected Account(){
+
+    }
+
+    public Account(String type, BigDecimal balance){
         this.type = type;
         this.balance = balance;
     }
@@ -25,10 +40,10 @@ public class Account {
         this.type = type;
     }
 
-    public double getBalance(){
+    public BigDecimal getBalance(){
         return balance;
     }
-    public void setBalance(double balance){
+    public void setBalance(BigDecimal balance){
         this.balance = balance;
     }
 }
