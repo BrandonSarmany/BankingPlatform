@@ -1,8 +1,12 @@
 package com.bankingplatform.controller;
+import com.bankingplatform.dto.AmountRequest;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
 import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
+import com.bankingplatform.dto.TransferRequest;
 import com.bankingplatform.service.AccountService;
 import com.bankingplatform.model.Account;
 import org.springframework.http.ResponseEntity;
@@ -55,4 +59,30 @@ public class HomeController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("/accounts/{id}/deposit")
+    public ResponseEntity<Account> deposit(@PathVariable Long id, @RequestBody AmountRequest request){
+        return accountService.deposit(id, request.getAmount())
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/accounts/{id}/withdrawal")
+    public ResponseEntity<Account> withdrawal(@PathVariable Long id, @RequestBody AmountRequest request){
+        return accountService.withdrawal(id, request.getAmount())
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/transfers")
+    public ResponseEntity<Account> transfer(@RequestBody TransferRequest request){
+        accountService.transfer(
+                request.getFromAccountId(),
+                request.getToAccountId(),
+                request.getAmount()
+        );
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
