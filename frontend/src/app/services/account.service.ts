@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Account } from '../models/account';
 import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +9,25 @@ import { Observable } from 'rxjs';
 
 export class AccountService{
   constructor(private http: HttpClient) {
-
+  }
+  private getAuthHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: 'Basic ' + btoa('brandon:password')
+    });
   }
 
-  getAccounts(): Observable<Account[]>{
-    return this.http.get<Account[]>('http://localhost:8080/accounts');
+  getAccounts(): Observable<Account[]> {
+    return this.http.get<Account[]>(
+      'http://localhost:8080/accounts',
+      { headers: this.getAuthHeaders() }
+    );
   }
 
   deposit(accountId: number, amount: number): Observable<Account> {
     return this.http.post<Account>(
       `http://localhost:8080/accounts/${accountId}/deposit`,
-      { amount }
+      { amount: amount },
+      { headers: this.getAuthHeaders() }
     );
   }
 }

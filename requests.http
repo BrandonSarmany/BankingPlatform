@@ -96,3 +96,7 @@ Content-Type: application/json
   "toAccountId": 2,
   "amount": 500.00
 }
+
+### Security Check
+GET http://localhost:8080/accounts
+
