@@ -1,0 +1,33 @@
+<div class="page">
+  <header>
+    <h1>Banking Platform</h1>
+    <p>Welcome {{ accountHolder }}.</p>
+  </header>
+
+  <h2>Accounts</h2>
+
+  <div class="accounts-grid">
+    @for (account of accounts(); track account.id) {
+      <div class="account-card">
+        <h3>{{ account.type }}</h3>
+        <p class="account-number">Account #{{ account.id }}</p>
+
+        <p class="balance">${{ account.balance }}</p>
+
+        <div class="deposit">
+          <input
+            #depositAmount
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Deposit amount">
+
+          <button
+            (click)="deposit(account.id, depositAmount.valueAsNumber)">
+            Deposit
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

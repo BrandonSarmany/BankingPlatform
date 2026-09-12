@@ -1,5 +1,6 @@
 package com.bankingplatform.controller;
 import com.bankingplatform.dto.AmountRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,6 +13,7 @@ import com.bankingplatform.model.Account;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class HomeController {
     private final AccountService accountService;
