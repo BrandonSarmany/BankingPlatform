@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
 
-  jobs:
+jobs:
     backend:
       name: Backend Tests
       runs-on: ubuntu-latest
