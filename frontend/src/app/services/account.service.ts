@@ -12,7 +12,7 @@ export class AccountService{
   }
   private getAuthHeaders(): HttpHeaders {
     return new HttpHeaders({
-      Authorization: 'Basic ' + btoa('brandon:password')
+      Authorization: 'Basic ' + btoa('demo:demo')
     });
   }
 

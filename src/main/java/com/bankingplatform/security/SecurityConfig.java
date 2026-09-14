@@ -1,5 +1,6 @@
 package com.bankingplatform.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.Customizer;
@@ -12,6 +13,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+    @Value("${app.security.username}")
+    private String username;
+
+    @Value("${app.security.password}")
+    private String password;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -27,8 +34,8 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("brandon")
-                .password("{noop}password")
+        UserDetails user = User.withUsername(username)
+                .password("{noop}" + password)
                 .roles("USER")
                 .build();
 
