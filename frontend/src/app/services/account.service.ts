@@ -11,6 +11,7 @@ export class AccountService{
   constructor(private http: HttpClient) {
   }
   private getAuthHeaders(): HttpHeaders {
+    //Demo-only Basic authentication
     return new HttpHeaders({
       Authorization: 'Basic ' + btoa('demo:demo')
     });
