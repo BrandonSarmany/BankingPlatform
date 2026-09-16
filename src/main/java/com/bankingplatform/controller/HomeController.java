@@ -27,7 +27,7 @@ public class HomeController {
     }
 
     @GetMapping("/accounts")
-    public List <Account> newAccount(){
+    public List <Account> getAccounts(){
         return accountService.getAccounts();
     }
 
@@ -77,7 +77,7 @@ public class HomeController {
     }
 
     @PostMapping("/transfers")
-    public ResponseEntity<Account> transfer(@RequestBody TransferRequest request){
+    public ResponseEntity<Void> transfer(@RequestBody TransferRequest request){
         accountService.transfer(
                 request.getFromAccountId(),
                 request.getToAccountId(),
